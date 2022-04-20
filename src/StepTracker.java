@@ -5,7 +5,7 @@ public class StepTracker {
     Integer[][] userData;//для хранения числа шагов за год по месяцам и дням
 
     StepTracker() {
-        aimStepNumber = 10000;
+        aimStepNumber = 1;
         Integer[][] userData = new Integer[13][31];
         for (int i = 0; i < userData.length; i++) {
             for (int j = 0; j < userData[i].length; j++) {
@@ -15,8 +15,16 @@ public class StepTracker {
         this.userData = userData;
     }
 
-    void setAimStepNumber(Integer aimStepNumberByUser) {
-        aimStepNumber = aimStepNumberByUser;
+    public boolean setAimStepNumber(Integer aimStepNumberByUser) {
+
+        if (aimStepNumberByUser > 0) {
+            aimStepNumber = aimStepNumberByUser;
+            System.out.println("Новая цель по количеству шагов в день: " + aimStepNumber + "\n");
+            return true;
+        } else {
+            System.out.println("Новая цель по количеству шагов в день д.б больше нуля " + "\n");
+            return false;
+        }
     }
 
     void inputUserdata(Integer month, Integer day, Integer steps) {
@@ -26,29 +34,26 @@ public class StepTracker {
 
     public boolean checkUserMonth(Integer month) {
         if (month < 1 | month > 12) {
-            System.out.println("месяц дожен быть в диапазоне 1-12: " + "\n");
+            System.out.println("месяц дожен быть в диапазоне 1-12 ! " + "\n");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     public boolean checkUserDay(Integer day) {
         if (day < 0 | day > 30) {
-            System.out.println("день дожен быть в диапазоне 1-30 " + "\n");
+            System.out.println("день дожен быть в диапазоне 1-30 ! " + "\n");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     public boolean checkUserSteps(Integer steps) {
         if (steps < 0) {
-            System.out.println("число шагов д.б неотрицательным числом " + "\n");
+            System.out.println("число шагов д.б неотрицательным числом !" + "\n");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     public void monthUserStatistic(Integer month) {
@@ -124,10 +129,11 @@ public class StepTracker {
         for (int j = 1; j < userData[month].length; j++) {
             if (userData[month][j] >= this.aimStepNumber) {
                 counter++;
-            } else {
                 if (counter > counterMax) {
                     counterMax = counter;
                 }
+
+            } else {
                 counter = 0;
             }
         }

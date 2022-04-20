@@ -50,10 +50,14 @@ public class Main {
                 myTracker.monthUserStatistic(month);
 
             } else if (command == 3) {
-                System.out.println("Введите целевое число шагов в день: " + "\n");
-                Integer userData = scanner.nextInt();
-                myTracker.setAimStepNumber(userData);
-                System.out.println("Новая цель по количеству шагов в день: " + myTracker.aimStepNumber + "\n");
+                boolean isCorrect;
+
+                do {
+                    System.out.println("Введите целевое число шагов в день: " + "\n");
+                    Integer userData = scanner.nextInt();
+                    isCorrect = myTracker.setAimStepNumber(userData);
+                } while (!isCorrect);
+
 
             } else if (command == 4) {
                 System.out.println("До свидания!");
